@@ -9,9 +9,7 @@ function getClient(): messagingApi.MessagingApiClient {
 }
 
 export async function pushMessage(message: Message): Promise<void> {
-  const userId = process.env.LINE_USER_ID;
-  if (!userId) throw new Error('LINE_USER_ID is not set');
-  await getClient().pushMessage({ to: userId, messages: [message] });
+  await getClient().broadcast({ messages: [message] });
 }
 
 export async function replyMessage(replyToken: string, message: Message): Promise<void> {
