@@ -11,6 +11,9 @@ async function enrich(anime: AiringAnime, enricher: AnimeInfoEnricher): Promise<
     anime.synonymsChineseTitle ??
     stripSeasonSuffix(anime.nativeTitle);
 
+  // Wikipedia 日文摘要優先（首句），AniList 英文摘要備援
+  const description = wiki.japaneseSynopsis ?? anime.description;
+
   const season =
     wiki.seasonCount !== null
       ? Math.max(anime.anilistSeason, wiki.seasonCount)
@@ -22,6 +25,7 @@ async function enrich(anime: AiringAnime, enricher: AnimeInfoEnricher): Promise<
     mediaId: anime.mediaId,
     chineseTitle,
     nativeTitle: stripSeasonSuffix(anime.nativeTitle),
+    description,
     coverImage: anime.coverImage,
     studio: anime.studio,
     voiceActors: anime.voiceActors,

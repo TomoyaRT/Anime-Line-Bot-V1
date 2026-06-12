@@ -22,6 +22,7 @@ export interface EnrichedAnime {
   mediaId: number;
   chineseTitle: string;
   nativeTitle: string;
+  description: string;
   coverImage: string;
   studio: string;
   voiceActors: string[];

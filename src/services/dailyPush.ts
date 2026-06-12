@@ -5,6 +5,8 @@ import type { MessageSender } from '../interfaces/MessageSender';
 import type { EnrichedAnime } from '../types/Anime';
 import { assembleDailyAnimes } from './dailyAnimeAssembler';
 import { buildFlexMessage } from '../ui/flexMessage';
+import { saveToCache } from '../db/redisCache';
+import { todayCSTDate } from '../utils/date';
 
 export interface DailyPushDeps {
   source: AnimeDataSource;
@@ -31,11 +33,6 @@ function validateData(animes: EnrichedAnime[]): string[] {
   return issues;
 }
 
-function todayCSTDate(): string {
-  const d = new Date(Date.now() + 8 * 60 * 60 * 1000);
-  return d.toISOString().slice(0, 10);
-}
-
 export async function runDailyPush(deps: DailyPushDeps): Promise<void> {
   const animes = await deps.source.fetchTodayAiring();
   if (animes.length === 0) {
@@ -47,6 +44,7 @@ export async function runDailyPush(deps: DailyPushDeps): Promise<void> {
   const date = todayCSTDate();
 
   await deps.repository.save(enriched, date);
+  await saveToCache(enriched, date);
   const saved = await deps.repository.load(date);
 
   const dataToSend = saved.length > 0 ? saved : enriched;

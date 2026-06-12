@@ -30,6 +30,8 @@ All secrets live in `.env` (never commit this file). Required variables:
 - `DATABASE_URL` — Neon PostgreSQL connection string
 - `GCP_PROJECT_ID` — GCP project identifier
 - `GITHUB_PERSONAL_ACCESS_TOKEN` — GitHub API access token
+- `UPSTASH_REDIS_REST_URL` — Upstash Redis REST endpoint URL
+- `UPSTASH_REDIS_REST_TOKEN` — Upstash Redis REST auth token
 
 ## Architecture Notes
 

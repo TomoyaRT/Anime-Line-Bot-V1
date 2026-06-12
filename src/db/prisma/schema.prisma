@@ -15,6 +15,7 @@ model DailyAnime {
   mediaId      Int      @map("media_id")
   chineseTitle String   @map("chinese_title")
   nativeTitle  String   @map("native_title")
+  description  String?
   coverImage   String?  @map("cover_image")
   studio       String?
   voiceActors  String[] @map("voice_actors")

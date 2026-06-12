@@ -8,6 +8,7 @@ async function save(animes: EnrichedAnime[], date: string): Promise<void> {
     const data = {
       chineseTitle: a.chineseTitle,
       nativeTitle: a.nativeTitle,
+      description: a.description || null,
       coverImage: a.coverImage,
       studio: a.studio,
       voiceActors: a.voiceActors,
@@ -34,6 +35,7 @@ async function load(date: string): Promise<EnrichedAnime[]> {
     mediaId: Number(row.mediaId),
     chineseTitle: row.chineseTitle,
     nativeTitle: row.nativeTitle,
+    description: row.description ?? '',
     coverImage: row.coverImage ?? '',
     studio: row.studio ?? '不明',
     voiceActors: row.voiceActors ?? [],
