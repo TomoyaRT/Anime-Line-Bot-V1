@@ -2,4 +2,6 @@ node_modules/
 dist/
 local.env
 .env
-gcp-env.yaml
+deploy/gcp-env.yaml
+task
+.claude/

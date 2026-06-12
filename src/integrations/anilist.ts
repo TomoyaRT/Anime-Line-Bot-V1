@@ -1,4 +1,6 @@
 import axios from 'axios';
+import type { AiringAnime } from '../types/Anime';
+import type { AnimeDataSource } from '../interfaces/AnimeDataSource';
 
 const ANILIST_URL = 'https://graphql.anilist.co';
 
@@ -87,20 +89,6 @@ function hasChinese(s: string): boolean {
   return hasCJK && !hasKana;
 }
 
-export interface AiringAnime {
-  airingAt: number;
-  episode: number;
-  mediaId: number;
-  nativeTitle: string;
-  englishTitle: string;
-  synonymsChineseTitle: string | null;
-  description: string;
-  coverImage: string;
-  studio: string;
-  voiceActors: string[];
-  anilistSeason: number;
-}
-
 export async function fetchTodayAiring(): Promise<AiringAnime[]> {
   const now = new Date();
   const offset = 8 * 60 * 60 * 1000;
@@ -147,3 +135,9 @@ export async function fetchNativeTitleById(mediaId: number): Promise<string> {
   const res = await axios.post(ANILIST_URL, { query: SYNOPSIS_QUERY, variables: { id: mediaId } });
   return res.data?.data?.Media?.title?.native ?? '';
 }
+
+// AniList 對 AnimeDataSource 合約的實作。
+export const anilistSource: AnimeDataSource = {
+  fetchTodayAiring,
+  fetchNativeTitleById,
+};

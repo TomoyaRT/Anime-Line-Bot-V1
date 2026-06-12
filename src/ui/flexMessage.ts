@@ -1,19 +1,8 @@
 import { messagingApi } from '@line/bot-sdk';
+import type { EnrichedAnime } from '../types/Anime';
 type FlexBubble = messagingApi.FlexBubble;
 type FlexCarousel = messagingApi.FlexCarousel;
 type FlexMessage = messagingApi.FlexMessage;
-
-export interface EnrichedAnime {
-  airingAt: number;
-  episode: number;
-  mediaId: number;
-  chineseTitle: string;
-  nativeTitle: string;
-  coverImage: string;
-  studio: string;
-  voiceActors: string[];
-  season: number;
-}
 
 const DAY_ZH = ['日', '一', '二', '三', '四', '五', '六'];
 

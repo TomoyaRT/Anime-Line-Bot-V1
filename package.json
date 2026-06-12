@@ -6,6 +6,8 @@
   "scripts": {
     "start": "ts-node -r dotenv/config src/index.ts",
     "build": "tsc",
+    "postinstall": "prisma generate",
+    "db:migrate": "prisma migrate dev",
     "deploy": "gcloud functions deploy animeDailyPush --gen2 --runtime=nodejs24 --region=asia-east1 --trigger-http --allow-unauthenticated --entry-point=animeDailyPush"
   },
   "keywords": [],
@@ -15,13 +17,13 @@
   "dependencies": {
     "@google-cloud/functions-framework": "^5.0.2",
     "@line/bot-sdk": "^11.0.1",
-    "axios": "^1.17.0",
-    "pg": "^8.21.0"
+    "@prisma/client": "^6.19.3",
+    "axios": "^1.17.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.3",
-    "@types/pg": "^8.20.0",
     "dotenv": "^17.4.2",
+    "prisma": "^6.19.3",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   }

@@ -1,4 +1,5 @@
 import { messagingApi } from '@line/bot-sdk';
+import type { MessageSender } from '../interfaces/MessageSender';
 type Message = messagingApi.Message;
 
 function getClient(): messagingApi.MessagingApiClient {
@@ -16,3 +17,9 @@ export async function pushMessage(message: Message): Promise<void> {
 export async function replyMessage(replyToken: string, message: Message): Promise<void> {
   await getClient().replyMessage({ replyToken, messages: [message] });
 }
+
+// LINE 對 MessageSender 合約的實作。
+export const lineMessenger: MessageSender = {
+  push: pushMessage,
+  reply: replyMessage,
+};

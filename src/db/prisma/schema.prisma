@@ -1,0 +1,27 @@
+// daily_anime 表結構。欄位以 @map 對應既有資料庫的 snake_case 欄名，
+// 確保重構後沿用同一張表，不影響既有資料與推播畫面。
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DailyAnime {
+  pushDate     DateTime @map("push_date") @db.Date
+  mediaId      Int      @map("media_id")
+  chineseTitle String   @map("chinese_title")
+  nativeTitle  String   @map("native_title")
+  coverImage   String?  @map("cover_image")
+  studio       String?
+  voiceActors  String[] @map("voice_actors")
+  season       Int?
+  episode      Int?
+  airingAt     BigInt?  @map("airing_at")
+
+  @@id([pushDate, mediaId])
+  @@map("daily_anime")
+}
