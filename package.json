@@ -8,7 +8,8 @@
     "build": "tsc",
     "postinstall": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "deploy": "gcloud functions deploy animeDailyPush --gen2 --runtime=nodejs24 --region=asia-east1 --trigger-http --allow-unauthenticated --entry-point=animeDailyPush"
+    "setup:menu": "ts-node -r dotenv/config src/scripts/setupRichMenu.ts",
+    "deploy": "gcloud functions deploy animeDailyPush --gen2 --runtime=nodejs24 --region=asia-east1 --trigger-http --allow-unauthenticated --entry-point=animeDailyPush --env-vars-file deploy/gcp-env.yaml"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "@google-cloud/functions-framework": "^5.0.2",
     "@line/bot-sdk": "^11.0.1",
     "@prisma/client": "^6.19.3",
+    "@upstash/redis": "^1.38.0",
     "axios": "^1.17.0"
   },
   "devDependencies": {
