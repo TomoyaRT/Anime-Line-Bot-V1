@@ -4,9 +4,13 @@
       "Bash(git -C /Users/tomoya/Desktop log --oneline -5)",
       "Bash(git -C /Users/tomoya/Desktop status)",
       "Bash(git -C /Users/tomoya/Desktop show HEAD:README.md)",
+      "Bash(git commit *)",
       "Bash(npm init *)",
       "Bash(npm install *)",
       "Edit(.claude/**)"
+    ],
+    "ask": [
+      "Bash(git push *)"
     ]
   }
 }

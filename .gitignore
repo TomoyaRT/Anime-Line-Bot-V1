@@ -4,4 +4,4 @@ local.env
 .env
 deploy/gcp-env.yaml
 task
-.claude/
+.claude/memory/
